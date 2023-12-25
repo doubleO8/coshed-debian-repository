@@ -1,0 +1,9 @@
+repositories_mapping:
+    ring0: "packages.ring0/all"
+    ring1: "packages.ring1/all"
+    ring2: "packages/all"
+
+published:
+    example-dependencies_1.23_all.deb: ["ring0", "ring1", "ring2"]
+    example_1.23.0_all.deb: ["ring1", "ring2"]
+    example_1.23.1_all.deb: ["ring0"]

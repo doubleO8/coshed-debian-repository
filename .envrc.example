@@ -1,0 +1,14 @@
+## AWS credentials
+export AWS_ACCESS_KEY_ID=XXX
+export AWS_DEFAULT_REGION=YYY
+export AWS_SECRET_ACCESS_KEY=ZZZ
+
+## S3 Bucket
+export COODEER_BUCKET="my-bucket"
+
+## locale settings for dpkg-scanpackages
+export LANGUAGE=C
+export LC_ALL=C
+
+## python virtual env
+#layout virtualenv $(realpath "venv")
