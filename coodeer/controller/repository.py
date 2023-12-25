@@ -187,7 +187,13 @@ class RepositoryControl:
                 targets.append((repo_key, target_path))
 
             self.log.info(f"Package {package!r}")
-            pool_target = self.soc.pull(package, pool_root)
+
+            try:
+                pool_target = self.soc.pull(package, pool_root)
+            except KeyError as kexc:
+                self.log.warning(f" Missing! IGNORED.")
+                continue
+
             self.log.debug(f" Source: {pool_target!r}")
 
             for repo_key, target in sorted(targets):

@@ -59,6 +59,7 @@ def coodeer_upload(ctx, **kwargs):
 
 @cli.command("create", context_settings=CONTEXT_SETTINGS)
 @pass_client
+@click.option("repository_specification", "--repository-specification")
 @click.argument("repositories_root")
 def coodeer_create(ctx, **kwargs):
     """
