@@ -1,0 +1,8 @@
+*~
+/.vscode
+/venv
+*.py[cod]
+/.envrc
+/local
+/spec.yaml
+/simple.py
