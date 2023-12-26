@@ -20,7 +20,7 @@ exclude = '''
 
 [tool.poetry]
 name = "coodeer"
-version = "0.4.6"
+version = "0.4.11"
 description = "Minimalistic local debian repository using packages in S3 bucket as source"
 authors = ["doubleO8 <wb008@hdm-stuttgart.de>"]
 license = "GPL-2.0-only"
