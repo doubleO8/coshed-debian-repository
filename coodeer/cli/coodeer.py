@@ -40,7 +40,7 @@ def cli(ctx, **kwargs):
 
 @cli.command("upload", context_settings=CONTEXT_SETTINGS)
 @pass_client
-@click.argument("packages")
+@click.argument("packages", nargs=-1)
 def coodeer_upload(ctx, **kwargs):
     """
     Upload debian packages to source bucket
