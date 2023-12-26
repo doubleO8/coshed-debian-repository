@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Cache-Control Header
-
-    * https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
-    * https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#revalidation_and_reloading
 
 HEAD response
 
@@ -35,7 +31,7 @@ def md5_sum(local_fn):
 
 class S3ObjectsControl:
     """
-    Asset's uploading Controller.
+    Asset's up-/downloading Controller.
     (Based on https://github.com/doubleO8/sure-shot-static/blob/master/sure_shot_static/intergalactic.py)
 
 
@@ -117,7 +113,13 @@ class S3ObjectsControl:
 
             s3_resource = boto3.resource("s3")
 
-            s3_resource.Object(self.bucket, rel_path).download_file(abs_path)
+            try:
+                s3_resource.Object(self.bucket, rel_path).download_file(abs_path)
+            except botocore.exceptions.ClientError as bex:
+                if bex.response["ResponseMetadata"]["HTTPStatusCode"] == 404:
+                    raise KeyError(rel_path)
+                else:
+                    raise
 
         return abs_path
 
