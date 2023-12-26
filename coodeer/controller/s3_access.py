@@ -138,6 +138,7 @@ class S3ObjectsControl:
             bool: ``True`` if operation succeeded
         """
         need_push = True
+        head_response = None
 
         upload_args = {
             "Key": rel_path,
@@ -145,7 +146,10 @@ class S3ObjectsControl:
             "ContentType": mime_type,
         }
 
-        head_response = self.head(rel_path)
+        try:
+            head_response = self.head(rel_path)
+        except KeyError:
+            pass
 
         if head_response:
             need_push = False
