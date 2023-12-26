@@ -63,11 +63,11 @@ class RepositoryControl:
         self.soc = S3ObjectsControl()
 
     def upload(self, path, blacklisted=None, whitelisted_content_types=None):
-        items = {}
+        items = set()
 
         if os.path.isfile(path):
             items.add((os.path.basename(path), os.path.abspath(path)))
-        else:
+        elif os.path.isdir(path):
             for item in os.listdir(path):
                 try:
                     if item in blacklisted:
