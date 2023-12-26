@@ -110,11 +110,6 @@ class S3ObjectsControl:
                     self.log.warning(
                         "MD5 sum/ETag comparison failed: {!s}".format(exc)
                     )
-        else:
-            try:
-                head_response = self.head(rel_path)
-            except KeyError:
-                raise
 
         if need_pull:
             parent = os.path.dirname(abs_path)
