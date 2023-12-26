@@ -43,13 +43,15 @@ def cli(ctx, **kwargs):
 @click.argument("packages")
 def coodeer_upload(ctx, **kwargs):
     """
-    Upload debian packages to bucket
+    Upload debian packages to source bucket
     """
     whitelisted_content_types = ["application/vnd.debian.binary-package"]
 
     for path in kwargs["packages"]:
         try:
-            ctx.upload(path, whitelisted_content_types=whitelisted_content_types)
+            ctx.upload(
+                path, whitelisted_content_types=whitelisted_content_types
+            )
         except Exception as exc:
             LOG.error(exc)
             sys.exit(1)
@@ -59,7 +61,11 @@ def coodeer_upload(ctx, **kwargs):
 
 @cli.command("create", context_settings=CONTEXT_SETTINGS)
 @pass_client
-@click.option("repository_specification", "--repository-specification")
+@click.option(
+    "repository_specification",
+    "--repository-specification",
+    help="Repository specification file (YAML)",
+)
 @click.argument("repositories_root")
 def coodeer_create(ctx, **kwargs):
     """
@@ -93,6 +99,7 @@ def coodeer_create(ctx, **kwargs):
 
     sys.exit(0)
 
+
 @cli.command("publish", context_settings=CONTEXT_SETTINGS)
 @pass_client
 @click.argument("repository_specification")
@@ -100,7 +107,10 @@ def coodeer_publish(ctx, **kwargs):
     """
     Publish repository specification
     """
-    repository_specification = kwargs.get("repository_specification")
+    repository_specification = kwargs.get(
+        "repository_specification",
+        help="Repository specification file (YAML)",
+    )
 
     try:
         ctx.put_latest_repository_specification(repository_specification)

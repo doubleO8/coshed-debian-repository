@@ -114,7 +114,9 @@ class S3ObjectsControl:
             s3_resource = boto3.resource("s3")
 
             try:
-                s3_resource.Object(self.bucket, rel_path).download_file(abs_path)
+                s3_resource.Object(self.bucket, rel_path).download_file(
+                    abs_path
+                )
             except botocore.exceptions.ClientError as bex:
                 if bex.response["ResponseMetadata"]["HTTPStatusCode"] == 404:
                     raise KeyError(rel_path)
