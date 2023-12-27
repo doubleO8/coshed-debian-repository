@@ -45,7 +45,10 @@ def coodeer_upload(ctx, **kwargs):
     """
     Upload debian packages to source bucket
     """
-    whitelisted_content_types = ["application/vnd.debian.binary-package"]
+    whitelisted_content_types = [
+        "application/vnd.debian.binary-package",
+        "application/pgp-signature",
+    ]
 
     for path in kwargs["packages"]:
         try:
