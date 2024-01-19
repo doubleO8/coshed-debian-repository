@@ -110,10 +110,7 @@ def coodeer_publish(ctx, **kwargs):
     """
     Publish repository specification
     """
-    repository_specification = kwargs.get(
-        "repository_specification",
-        help="Repository specification file (YAML)",
-    )
+    repository_specification = kwargs.get("repository_specification")
 
     try:
         ctx.put_latest_repository_specification(repository_specification)
